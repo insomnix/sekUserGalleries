@@ -1,0 +1,196 @@
+#sekUserGallery{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    height: 100%;
+    max-height: 100%;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:13px;
+    line-height:18px;
+    color:#333333;
+}
+
+#sekUserGallery form.form, #sekUserGallery .space{
+    margin: 10px;
+}
+
+#sekug_content {
+    position: fixed;
+    top: 0;
+    left: 200px; /*Set left value to WidthOfFrameDiv*/
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    background: #fff;
+}
+#sekug_content h2{
+    margin: 10px;
+}
+#sekug_content ul.image-container{
+    /* This position the ul content in the middle of the gallery*/
+    margin:0;
+    padding:0;
+}
+#sekug_content ul.image-container li {
+    /* In order to create the proper effect with hover we should use display inline-table
+        This will display the big picture right next to its thumbnail
+    */
+    list-style:none;
+    display:inline-table;
+    padding:10px;
+}
+#sekug_content ul.image-container li ul{
+    margin:0;
+    padding: 10px 0;
+}
+#sekug_content ul.image-container li ul li{
+    display:block;
+    text-align:center;
+    width:180px;
+    padding: 0;
+}
+#sekug_content ul.image-container li ul li h5{
+    margin: 0 0 2px;
+    font-size: 14px;
+    text-decoration:underline;
+    color: #063144;
+}
+
+#sekug_side{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 200px; /*Width of frame div*/
+    height: 100%;
+    overflow: hidden; /*Disable scrollbars. Set to "scroll" to enable*/
+    background: none repeat scroll 0 0 #14516E;
+    color: white;
+}
+
+.sekug_description{
+    margin: 15px;
+}
+
+ul.nav {
+    list-style: none;
+    display: block;
+    position: relative;
+    padding: 0;
+}
+ul.nav li a {
+    background: none repeat scroll 0 0 #43A87E;
+    color: #034E30;
+    padding: 7px 15px;
+    display: block;
+    text-decoration: none;
+    border-bottom: 1px solid #14516E;
+}
+ul.nav li a:hover {
+    background: none repeat scroll 0 0 #034E30;
+    color: #43A87E;
+    padding: 7px 15px 7px 30px;
+}
+
+.altimglink {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #4784a1), color-stop(1, #063144) );
+    background:-moz-linear-gradient( center top, #4784a1 5%, #063144 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#4784a1', endColorstr='#063144');
+    background-color:#4784a1;
+    -moz-border-radius:18px;
+    -webkit-border-radius:18px;
+    font-size: 10px;
+    border-radius:22px;
+    border:-1px solid #773671;
+    display:inline-block;
+    color:#ffffff;
+    padding:1px 16px;
+    text-decoration:none;
+    margin: 1px 0;
+}
+.altimglink:hover {
+     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #063144), color-stop(1, #4784a1) );
+     background:-moz-linear-gradient( center top, #063144 5%, #4784a1 100% );
+     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#063144', endColorstr='#4784a1');
+     background-color:#063144;
+ }
+.altimglink:active {
+      position:relative;
+      top:1px;
+  }
+
+input[type="text"], textarea {
+    width: 300px;
+}
+input, textarea {
+    -moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+
+input, textarea, select, .uneditable-input {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    color: #555555;
+    display: inline-block;
+    line-height: 18px;
+    margin-bottom: 5px;
+    padding: 4px;
+}
+
+label, input, button, select, textarea {
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+}
+
+button, input {
+    line-height: normal;
+}
+
+button, input, select, textarea {
+    margin: 0;
+    vertical-align: middle;
+}
+
+textarea {
+    overflow: auto;
+    vertical-align: top;
+    height: auto;
+}
+
+input:focus,textarea:focus,input[type="button"]:hover,input[type="submit"]:hover,input[type="file"]:hover{
+    border-color:rgba(82, 168, 236, 0.8);
+    -webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075),0 0 8px rgba(82, 168, 236, 0.6);
+    -moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075),0 0 8px rgba(82, 168, 236, 0.6);
+    box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075),0 0 8px rgba(82, 168, 236, 0.6);
+    outline:0;
+    outline:thin dotted \9;
+}
+input[type="file"]:focus,input[type="checkbox"]:focus,input[type="file"]:focus,select:focus{
+    -webkit-box-shadow:none;
+    -moz-box-shadow:none;
+    box-shadow:none;
+    outline:thin dotted;
+    outline:5px auto -webkit-focus-ring-color;
+    outline-offset:-2px;
+}
+input:focus:required:invalid,textarea:focus:required:invalid,select:focus:required:invalid{
+    color:#b94a48;border-color:#ee5f5b;
+}
+input:focus:required:invalid:focus,textarea:focus:required:invalid:focus,select:focus:required:invalid:focus{
+    border-color:#e9322d;
+    -webkit-box-shadow:0 0 6px #f8b9b7;
+    -moz-box-shadow:0 0 6px #f8b9b7;
+    box-shadow:0 0 6px #f8b9b7;
+}
+.form-actions{
+    padding:17px 20px 18px;
+    margin-top:18px;
+    margin-bottom:18px;
+    background-color:#f5f5f5;
+    border-top:1px solid #ddd;
+}
+button,input,select,textarea{margin:0;font-size:100%;vertical-align:middle;}
+button,input{*overflow:visible;line-height:normal;}
+button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0;}
+button,input[type="button"],input[type="reset"],input[type="submit"]{cursor:pointer;-webkit-appearance:button;}

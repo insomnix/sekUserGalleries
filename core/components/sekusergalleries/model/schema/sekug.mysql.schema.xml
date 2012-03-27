@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model package="sekusergalleries" baseClass="xPDOSimpleObject" platform="mysql" defaultEngine="MyISAM">
+	<!-- user album permissions -->
+    <object class="sekugGroupSettings" table="sekug_groupsettings" extends="xPDOSimpleObject">
+		<field key="usergroup" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
+		<field key="userrole" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
+		<field key="amount" dbtype="smallint" precision="3" attributes="unsigned" phptype="integer" null="false" default="0" />
+		<field key="unit" dbtype="enum" precision="'MiB','GiB','TiB','PiB','EiB','ZiB','YiB'" phptype="string" null="false" default="MiB"/>
+		<field key="level" dbtype="enum" precision="'Soft','Hard'" phptype="string" null="false" default="Soft"/>
+		<field key="private" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
+
+		<aggregate alias="modUserGroup" class="modUserGroup" local="usergroup" foreign="id" cardinality="one" owner="foreign"/>
+		<aggregate alias="modUserGroupRole" class="modUserGroupRole" local="userrole" foreign="id" cardinality="one" owner="foreign"/>
+    </object>
+	
+	<!-- user gallery settings -->
+    <object class="sekugUserSettings" table="sekug_usersettings" extends="xPDOObject">
+		<field key="gallery_user" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
+		<field key="gallery_title" dbtype="varchar" precision="50" phptype="string" null="false" default="" />
+		<field key="gallery_description" dbtype="text" phptype="string" null="false" default="" />
+		<field key="gallery_cover" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="private" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
+        <field key="password" dbtype="varchar(100)" phptype="string" null="true" />
+
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true">
+			<column key="gallery_user" collation="A" null="false" />
+		</index>
+		<aggregate alias="modUser" class="modUser" local="gallery_user" foreign="id" cardinality="one" owner="foreign" />
+		<aggregate alias="sekugAlbums" class="sekugAlbums" local="gallery_user" foreign="album_user" cardinality="many" owner="local" />
+    </object>
+
+	<!-- user albums information -->
+    <object class="sekugAlbums" table="sekug_albums" extends="xPDOSimpleObject">
+		<field key="album_user" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
+		<field key="album_title" dbtype="varchar" precision="50" phptype="string" null="false" default="" />
+		<field key="album_description" dbtype="text" phptype="string" null="false" default="" />
+        <field key="album_keywords" dbtype="text" phptype="string" null="false" default="" />
+		<field key="album_cover" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
+		<field key="album_parent" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
+		<field key="active_from" dbtype="date" phptype="date" null="true" />
+		<field key="active_to" dbtype="date" phptype="date" null="true" />
+		<field key="private" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
+		<field key="password" dbtype="varchar(100)" phptype="string" null="true" />
+		<field key="createdon" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00" />
+		<field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00" />
+		
+		<aggregate alias="modUser" class="modUser" local="album_user" foreign="id" cardinality="one" owner="foreign"/>
+		<aggregate alias="sekugUserSettings" class="sekugUserSettings" local="album_user" foreign="gallery_user" cardinality="one" owner="foreign"/>
+		<composite alias="sekugAlbumItems" class="sekugAlbumItems" local="id" foreign="album_id" cardinality="many" owner="local" />
+    </object>
+	
+	<!-- album item information -->
+    <object class="sekugAlbumItems" table="sekug_albumitems" extends="xPDOSimpleObject">
+		<field key="album_id" dbtype="int" attributes="unsigned" precision="10" phptype="integer" null="false" default="0" />
+		<field key="item_title" dbtype="varchar" precision="50" phptype="string" null="false" default="" />
+		<field key="item_description" dbtype="text" phptype="string" null="false" default="" />
+        <field key="file_datetime" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="file_name" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+		<field key="file_ext" dbtype="varchar" precision="10" phptype="string" null="false" default="" />
+		<field key="file_ext_resize" dbtype="varchar" precision="10" phptype="string" null="false" default="" />
+		<field key="createdon" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00" />
+		<field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00" />
+
+		<aggregate alias="sekugAlbums" class="sekugAlbums" local="album_id" foreign="id" cardinality="one" owner="foreign"/>
+    </object>
+
+    <!-- image size creation -->
+    <object class="sekugImageSizes" table="sekug_imagesizes" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="description" dbtype="text" phptype="string" null="false" default="" />
+        <field key="max_width" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="max_height" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="image_quality" dbtype="smallint" precision="3" attributes="unsigned" phptype="integer" null="false" default="90" />
+        <field key="watermark_image" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="watermark_brightness" dbtype="smallint" precision="3" attributes="unsigned" phptype="integer" null="false" default="50" />
+        <field key="watermark_text" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="watermark_text_color" dbtype="varchar" precision="12" phptype="string" null="false" default="" />
+        <field key="watermark_font" dbtype="varchar" precision="100" phptype="string" null="false" default="Arial" />
+        <field key="watermark_font_size" dbtype="smallint" precision="3" attributes="unsigned" phptype="integer" null="false" default="14" />
+        <field key="watermark_location" dbtype="enum" precision="'NorthWest','North','NorthEast','West','Center','East','SouthWest','South','SouthEast'" phptype="string" null="false" default="Center"/>
+        <field key="primary" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
+    </object>
+
+    <!-- accepted mime types -->
+    <object class="sekugMimeTypes" table="sekug_mimetypes" extends="xPDOSimpleObject">
+        <field key="mimetype" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="resize_ext" dbtype="varchar" precision="6" phptype="string" null="false" default="" />
+    </object>
+
+	<!-- report abuse -->
+    <object class="sekugReportAbuse" table="sekug_reportabuse" extends="xPDOSimpleObject">
+		<field key="item_type" dbtype="enum" precision="'Album','Item'" phptype="string" null="false" default="Item"/>
+		<field key="item_id" dbtype="int" attributes="unsigned" precision="10" phptype="integer" null="false" default="0" />
+		<field key="description" dbtype="text" phptype="string" null="false" default="" />
+		<field key="postedon" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00" />
+		<field key="resolved" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
+		<field key="notes" dbtype="text" phptype="string" null="false" default="" />
+    </object>
+	
+</model>

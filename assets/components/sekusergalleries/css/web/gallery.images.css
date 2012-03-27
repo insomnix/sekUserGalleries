@@ -1,0 +1,56 @@
+
+#gallery {
+/*    border: 10px solid #1D0C16;
+    height: 300px;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: visible;
+    background: #272229;
+    *//* box shadow effect in Safari and Chrome*//*
+    -webkit-box-shadow: #272229 10px 10px 20px;
+    *//* box shadow effect in Firefox*//*
+    -moz-box-shadow: #272229 10px 10px 20px;
+    *//* box shadow effect in IE*//*
+    filter: progid:DXImageTransform.Microsoft.Shadow(color='#272229', Direction=135, Strength=10);
+    *//* box shadow effect in Browsers that support it, Opera 10.5 pre-alpha release*//*
+    box-shadow: #272229 10px 10px 20px;*/
+}
+
+#gallery ul.image-container{
+    /* This position the ul content in the middle of the gallery*/
+    margin:0;
+	padding:0;
+}
+
+
+#gallery ul.image-container li {
+    /* In order to create the proper effect with hover we should use display inline-table
+        This will display the big picture right next to its thumbnail
+    */
+    list-style:none;
+    display:inline-table;
+    padding:10px;
+}
+
+
+#gallery ul.image-container li ul{
+    margin:0;
+	padding: 10px 0;
+/*	border:solid #CCCCCC 2px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;*/
+}
+
+#gallery ul.image-container li ul li{
+    display:block;
+	text-align:center;
+	width:180px;
+	padding: 0;
+}
+#gallery ul.image-container li ul li h5{
+    margin: 0 5px;
+	font-size:14px;
+	text-decoration:underline;
+}
