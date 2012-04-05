@@ -50,6 +50,26 @@ sekUserGalleries.panel.Home = function(config) {
                     ,preventRender: true
                 }]
             },{
+                title: _('sekug.watermark.images')
+                ,defaults: { autoHeight: true }
+                ,items: [{
+                    html: '<p>'+_('sekug.watermark.manager.desc')+'</p>'
+                    ,border: false
+                    ,bodyCssClass: 'panel-desc'
+                },{
+                    xtype: 'sekug-form-watermarks'
+                    ,cls: 'main-wrapper'
+                    ,preventRender: true
+                }]
+                ,listeners: {
+                    activate:  function() {
+                        //alert('tab was activated.');
+                        //this.getImages();
+                        //sekUserGalleries.panel.WatermarkImages.prototype.getImages();
+                        Ext.getCmp('sekug-form-watermarks').getImages();
+                    }
+                }
+            },{
                 title: _('sekug.reportabuse')
                 ,defaults: { autoHeight: true }
                 ,items: [{

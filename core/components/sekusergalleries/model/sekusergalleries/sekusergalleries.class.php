@@ -175,6 +175,7 @@ class sekUserGalleries {
         }
         return $return;
     }
+
     /**
      * Clean a string of tags and XSS attempts
      * 

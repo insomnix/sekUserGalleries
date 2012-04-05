@@ -46,7 +46,7 @@ sekUserGalleries.grid.ImageSizes = function(config) {
             ,dataIndex: 'watermark_image'
             ,sortable: false
             ,width: 50
-            ,editor: { xtype: 'textfield' }
+            ,editor: { xtype: 'sekug-combo-watermarkimages' ,renderer: true }
         },{
             header: _('sekug.brightness')
             ,dataIndex: 'watermark_brightness'
@@ -147,6 +147,9 @@ sekUserGalleries.window.CreateImageSizes = function(config) {
     Ext.applyIf(config,{
         title: _('sekug.create')
         ,url: sekUserGalleries.config.connectorUrl
+        ,autoHeight: false
+        ,height: Ext.getBody().getViewSize().height*.85
+        ,autoScroll: true
         ,baseParams: {
             action: 'mgr/imagesizes/create'
         }
@@ -176,9 +179,10 @@ sekUserGalleries.window.CreateImageSizes = function(config) {
             ,name: 'image_quality'
             ,anchor: '100%'
         },{
-            xtype: 'textfield'
+            xtype: 'sekug-combo-watermarkimages'
             ,fieldLabel: _('sekug.watermark.image')
             ,name: 'watermark_image'
+            ,hiddenName: 'watermark_image'
             ,anchor: '100%'
         },{
             xtype: 'textfield'
@@ -228,6 +232,9 @@ sekUserGalleries.window.UpdateImageSizes = function(config) {
     Ext.applyIf(config,{
         title: _('sekug.update')
         ,url: sekUserGalleries.config.connectorUrl
+        ,autoHeight: false
+        ,height: Ext.getBody().getViewSize().height*.85
+        ,autoScroll: true
         ,baseParams: {
             action: 'mgr/imagesizes/update'
         }
@@ -253,9 +260,10 @@ sekUserGalleries.window.UpdateImageSizes = function(config) {
             ,name: 'max_height'
             ,anchor: '100%'
         },{
-            xtype: 'textfield'
+            xtype: 'sekug-combo-watermarkimages'
             ,fieldLabel: _('sekug.watermark.image')
             ,name: 'watermark_image'
+            ,hiddenName: 'watermark_image'
             ,anchor: '100%'
         },{
             xtype: 'textfield'
@@ -327,3 +335,21 @@ sekUserGalleries.combo.WatermarkLocation = function(config) {
 };
 Ext.extend(sekUserGalleries.combo.WatermarkLocation,MODx.combo.ComboBox);
 Ext.reg('sekug-combo-watermarklocation',sekUserGalleries.combo.WatermarkLocation);
+
+sekUserGalleries.combo.WatermarkImages = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        displayField: 'image'
+        ,valueField: 'image'
+        ,fields: ['image']
+        ,url: sekUserGalleries.config.connectorUrl
+        ,baseParams: {
+            action: 'mgr/imagesizes/watermarkcombolist'
+        }
+        ,minChars: 1
+        ,pageSize: 20
+    });
+    sekUserGalleries.combo.WatermarkImages.superclass.constructor.call(this,config);
+};
+Ext.extend(sekUserGalleries.combo.WatermarkImages,MODx.combo.ComboBox);
+Ext.reg('sekug-combo-watermarkimages',sekUserGalleries.combo.WatermarkImages);

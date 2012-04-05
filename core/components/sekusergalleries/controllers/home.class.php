@@ -26,9 +26,11 @@ class sekusergalleriesHomeManagerController extends sekugManagerController {
     }
     public function getPageTitle() { return $this->modx->lexicon('sekug.usergalleries'); }
     public function loadCustomCssJs() {
+        $this->modx->regClientCss($this->sekug->config['cssUrl'].'mgr/main.css');
         $this->addJavascript($this->sekug->config['jsUrl'].'mgr/widgets/groupsettings.grid.js');
         $this->addJavascript($this->sekug->config['jsUrl'].'mgr/widgets/mimetypes.grid.js');
         $this->addJavascript($this->sekug->config['jsUrl'].'mgr/widgets/imagesizes.grid.js');
+        $this->addJavascript($this->sekug->config['jsUrl'].'mgr/widgets/watermarkimages.form.js');
         $this->addJavascript($this->sekug->config['jsUrl'].'mgr/widgets/reportabuse.grid.js');
         $this->addJavascript($this->sekug->config['jsUrl'].'mgr/widgets/usersettings.grid.js');
         $this->addJavascript($this->sekug->config['jsUrl'].'mgr/widgets/albums.grid.js');

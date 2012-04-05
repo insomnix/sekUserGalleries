@@ -1,3 +1,9 @@
+sekUserGalleries 0.0.2
+====================================
+- Added watermark image upload in manager
+- Added combo box select for watermarks uploaded to server
+- Updated lexicon with missing items
+
 sekUserGalleries 0.0.1
 ====================================
 - Addon Created

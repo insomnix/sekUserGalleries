@@ -210,4 +210,26 @@ class sekugDirectory {
         return true;
     }
 
+    /**
+     * Get the contents of a directory in an array
+     *
+     * @param string $directory The path to the directory to display
+     * @return array of files
+     */
+    public function get_directory_content($directory){
+        if (is_dir( $directory )){
+            $open_directory = opendir($directory);
+            $files = array();
+            while($file = readdir($open_directory)){
+                if($file !== '.' && $file !== '..'){
+                    $files[] = $file;
+                }
+            }
+            return $files;
+        }else{
+            $this->modx->log(modX::LOG_LEVEL_ERROR,'[sekUserGalleries] Directory does not exist: '.$directory);
+            return false;
+        }
+    }
+
 }

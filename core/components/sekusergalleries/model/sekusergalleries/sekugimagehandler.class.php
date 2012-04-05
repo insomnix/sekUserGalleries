@@ -105,6 +105,19 @@ class sekugImageHandler {
         return $file_name;
     }
 
+    public function update_scaled_images($filename){
+        $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
+        $type = finfo_file($finfo, $this->config['upload_dir'].$filename);
+        finfo_close($finfo);
+
+        $resize_ext = $this->config['accept_mime_types'][$type];
+        $resize_filename = pathinfo($filename,PATHINFO_FILENAME).'.'.$resize_ext;
+
+        foreach($this->config['image_versions'] as $version => $options) {
+            $this->create_scaled_image($filename, $resize_filename, $options);
+        }
+    }
+
     /**
      * Create display images
      * @param string $file_name
@@ -307,9 +320,6 @@ class sekugImageHandler {
                 $file->error = 'abort';
             }
             $file->size = $file_size;
-/*            $file->delete_url = $this->modx->makeUrl($this->modx->getOption('sekusergalleries.items_helper_resource_id'),'',array('album' => $album_id, file => rawurlencode($file->name)));
-            //$file->delete_url = str_replace('&','/&',$file->delete_url);
-            $file->delete_type = 'DELETE';*/
         } else {
             $file->error = $error;
         }
