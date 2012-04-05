@@ -106,9 +106,7 @@ class sekugImageHandler {
     }
 
     public function update_scaled_images($filename){
-        $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
-        $type = finfo_file($finfo, $this->config['upload_dir'].$filename);
-        finfo_close($finfo);
+        $type = $this->get_mime_type($this->config['upload_dir'].$filename);
 
         $resize_ext = $this->config['accept_mime_types'][$type];
         $resize_filename = pathinfo($filename,PATHINFO_FILENAME).'.'.$resize_ext;
@@ -345,6 +343,52 @@ class sekugImageHandler {
             }
         }
         return $success;
+    }
+
+    public function get_mime_type($file){
+        if (function_exists('finfo_open')) {
+            $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
+            $type = finfo_file($finfo, $file);
+            finfo_close($finfo);
+        } elseif (function_exists('mime_content_type')) {
+            $type = mime_content_type($file);
+        } else {
+            $type = $this->get_mime_type_manually($file);
+        }
+        return $type;
+    }
+
+    function get_mime_type_manually($file) {
+        // list of mime types
+        $mime_types = array(
+            "pdf"=>"application/pdf"
+            ,"exe"=>"application/octet-stream"
+            ,"zip"=>"application/zip"
+            ,"docx"=>"application/msword"
+            ,"doc"=>"application/msword"
+            ,"xls"=>"application/vnd.ms-excel"
+            ,"ppt"=>"application/vnd.ms-powerpoint"
+            ,"gif"=>"image/gif"
+            ,"png"=>"image/png"
+            ,"jpeg"=>"image/jpg"
+            ,"jpg"=>"image/jpg"
+            ,"mp3"=>"audio/mpeg"
+            ,"wav"=>"audio/x-wav"
+            ,"mpeg"=>"video/mpeg"
+            ,"mpg"=>"video/mpeg"
+            ,"mpe"=>"video/mpeg"
+            ,"mov"=>"video/quicktime"
+            ,"avi"=>"video/x-msvideo"
+            ,"3gp"=>"video/3gpp"
+            ,"css"=>"text/css"
+            ,"jsc"=>"application/javascript"
+            ,"js"=>"application/javascript"
+            ,"php"=>"text/html"
+            ,"htm"=>"text/html"
+            ,"html"=>"text/html"
+        );
+        $extension = strtolower(end(explode('.',$file)));
+        return $mime_types[$extension];
     }
 
 }

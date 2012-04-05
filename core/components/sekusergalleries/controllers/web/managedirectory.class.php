@@ -29,9 +29,13 @@ class sekugManageDirectoryController extends sekugController {
      * @return void
      */
     public function initialize() {
+        $loadjquery = $this->modx->getOption('sekusergalleries.load_jquery');
         $this->setDefaultProperties(array(
             'tplDirContainer' => 'directory.container',
             'tplDirGraph' => 'directory.bargraph',
+            'graphcss' => '',
+            'customcss' => '',
+            'loadjquery' => $loadjquery,
         ));
 
         $this->directory_name = $this->modx->user->get('id');
@@ -64,14 +68,26 @@ class sekugManageDirectoryController extends sekugController {
      * @return void
      */
     public function loadScripts() {
+        $graphcss = $this->getProperty('graphcss');
+        $customcss = $this->getProperty('customcss');
+        $loadjquery = $this->getProperty('loadjquery');
+
         $cssUrl = $this->sekug->config['cssUrl'].'web/';
         $jsUrl = $this->sekug->config['jsUrl'].'web/';
 
-        if($this->modx->getOption('sekusergalleries.load_jquery') == 1){
+        if($loadjquery == 1){
             $this->modx->regClientStartupScript($jsUrl.'libs/jquery-1.7.1.min.js');
         }
-        $this->modx->regClientCSS($cssUrl.'gallery.structure.css');
-        $this->modx->regClientCSS($cssUrl.'directory.graph.css');
+        if($customcss>''){
+            $this->modx->regClientCSS($this->modx->getOption('assets_url').$customcss);
+        } else {
+            $this->modx->regClientCSS($cssUrl.'gallery.structure.css');
+        }
+        if($graphcss>''){
+            $this->modx->regClientCSS($this->modx->getOption('assets_url').$graphcss);
+        } else {
+            $this->modx->regClientCSS($cssUrl.'directory.graph.css');
+        }
     }
 }
 return 'sekugManageDirectoryController';

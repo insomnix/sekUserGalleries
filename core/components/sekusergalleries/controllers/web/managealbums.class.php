@@ -29,6 +29,7 @@ class sekugManageAlbumsController extends sekugController {
      * @return void
      */
     public function initialize() {
+        $loadjquery = $this->modx->getOption('sekusergalleries.load_jquery');
 		$this->setDefaultProperties(array(
             'album' => '',
             'action' => '',
@@ -39,6 +40,8 @@ class sekugManageAlbumsController extends sekugController {
             'allowedTags' => '<br><b><i>',
             'preHooks' => '',
             'postHooks' => '',
+            'customcss' => '',
+            'loadjquery' => $loadjquery,
         ));
 
         if (!empty($_REQUEST['album'])) {
@@ -229,14 +232,21 @@ class sekugManageAlbumsController extends sekugController {
      * @return void
      */
     public function loadScripts() {
+        $customcss = $this->getProperty('customcss');
+        $loadjquery = $this->getProperty('loadjquery');
+
         $cssUrl = $this->sekug->config['cssUrl'].'web/';
         $jsUrl = $this->sekug->config['jsUrl'].'web/';
 
-        if($this->modx->getOption('sekusergalleries.load_jquery') == 1){
+        if($loadjquery == 1){
             $this->modx->regClientStartupScript($jsUrl.'libs/jquery-1.7.1.min.js');
         }
+        if($customcss>''){
+            $this->modx->regClientCSS($this->modx->getOption('assets_url').$customcss);
+        } else {
+            $this->modx->regClientCSS($cssUrl.'gallery.structure.css');
+        }
 		$this->modx->regClientStartupScript($jsUrl.'libs/jquery-ui-1.8.17.custom.min.js');
-        $this->modx->regClientCSS($cssUrl.'gallery.structure.css');
 		$this->modx->regClientCSS($cssUrl.'smoothness/jquery-ui-1.8.17.custom.css');
 		$datepicker = '<script>
 				$(function() {

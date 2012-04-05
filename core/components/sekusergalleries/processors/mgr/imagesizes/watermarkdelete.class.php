@@ -61,10 +61,7 @@ class sekugWatermarkDeleteProcessor extends modProcessor {
             return false;
         }
         $this->imagehandler = new sekugImageHandler($this->modx->sekug,$imgconfig);
-
-        $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
-        $type = finfo_file($finfo, $imgconfig['upload_dir'].$filename);
-        finfo_close($finfo);
+        $type = $this->imagehandler->get_mime_type($imgconfig['upload_dir'].$filename);
 
         $base_name = pathinfo($filename,PATHINFO_FILENAME);
         $resize_ext = $imgconfig['accept_mime_types'][$type];

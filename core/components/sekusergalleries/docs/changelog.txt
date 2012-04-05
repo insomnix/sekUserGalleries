@@ -1,3 +1,8 @@
+sekUserGalleries 0.0.3
+====================================
+- Added work around to get mime type if finfo or mime_content_type functions don't exist
+- Added customcss and loadjquery snippet options
+
 sekUserGalleries 0.0.2
 ====================================
 - Added watermark image upload in manager

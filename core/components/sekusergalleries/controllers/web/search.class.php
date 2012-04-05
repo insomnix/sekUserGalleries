@@ -27,9 +27,12 @@ class sekugSearchController extends sekugController {
      */
     public function initialize() {
         // set the default properties for the sekugManageAlbumItemsController class
+        $loadjquery = $this->modx->getOption('sekusergalleries.load_jquery');
         $this->setDefaultProperties(array(
             'tplContainer' => 'search.container',
             'tplAlbumList' => 'users.gallery.albumlist',
+            'customcss' => '',
+            'loadjquery' => $loadjquery,
         ));
     }
 
@@ -122,13 +125,20 @@ class sekugSearchController extends sekugController {
     }
 
     private function loadScripts(){
+        $customcss = $this->getProperty('customcss');
+        $loadjquery = $this->getProperty('loadjquery');
+
         $cssUrl = $this->sekug->config['cssUrl'].'web/';
         $jsUrl = $this->sekug->config['jsUrl'].'web/';
 
-        if($this->modx->getOption('sekusergalleries.load_jquery') == 1){
+        if($loadjquery == 1){
             $this->modx->regClientStartupScript($jsUrl.'libs/jquery-1.7.1.min.js');
         }
-        $this->modx->regClientCSS($cssUrl.'gallery.structure.css');
+        if($customcss>''){
+            $this->modx->regClientCSS($this->modx->getOption('assets_url').$customcss);
+        } else {
+            $this->modx->regClientCSS($cssUrl.'gallery.structure.css');
+        }
     }
 
 }

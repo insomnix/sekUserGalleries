@@ -27,9 +27,12 @@ class sekugViewGalleriesController extends sekugController {
      */
     public function initialize() {
         // set the default properties for the sekugManageAlbumItemsController class
+        $loadjquery = $this->modx->getOption('sekusergalleries.load_jquery');
         $this->setDefaultProperties(array(
             'tplContainer' => 'browse.galleries.container',
             'tplRow' => 'browse.galleries.row',
+            'customcss' => '',
+            'loadjquery' => $loadjquery,
         ));
         // if the gallery id is in the request, set it in the properties
         //if (!empty($_REQUEST['gallery'])) {
@@ -61,13 +64,20 @@ class sekugViewGalleriesController extends sekugController {
     }
 
     private function loadScripts(){
+        $customcss = $this->getProperty('customcss');
+        $loadjquery = $this->getProperty('loadjquery');
+
         $cssUrl = $this->sekug->config['cssUrl'].'web/';
         $jsUrl = $this->sekug->config['jsUrl'].'web/';
 
-        if($this->modx->getOption('sekusergalleries.load_jquery') == 1){
+        if($loadjquery == 1){
             $this->modx->regClientStartupScript($jsUrl.'libs/jquery-1.7.1.min.js');
         }
-        $this->modx->regClientCSS($cssUrl.'gallery.structure.css');
+        if($customcss>''){
+            $this->modx->regClientCSS($this->modx->getOption('assets_url').$customcss);
+        } else {
+            $this->modx->regClientCSS($cssUrl.'gallery.structure.css');
+        }
     }
 
 }
