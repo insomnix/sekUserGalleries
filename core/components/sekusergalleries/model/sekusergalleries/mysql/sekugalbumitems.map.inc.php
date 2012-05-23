@@ -96,4 +96,15 @@ $xpdo_meta_map['sekugAlbumItems']= array (
       'owner' => 'foreign',
     ),
   ),
+  'composites' => 
+  array (
+    'sekugFavorites' =>
+    array (
+      'class' => 'sekugFavorites',
+      'local' => 'id',
+      'foreign' => 'item_id',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+  ),
 );

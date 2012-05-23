@@ -47,6 +47,7 @@ class sekUserGalleries {
             'cssUrl' => $assetsUrl.'css/',
             'imagesUrl' => $assetsUrl.'images/',
             'assetsUrl' => $assetsUrl,
+            'jqueryFile' => 'jquery-1.7.2.min.js',
             'connectorUrl' => $assetsUrl.'connector.php',
         ),$config);
 		

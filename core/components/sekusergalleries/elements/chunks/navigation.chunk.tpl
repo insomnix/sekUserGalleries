@@ -1,5 +1,6 @@
 <ul class="nav">
     [[+search_albums_url:gt=``:then=`<li><a href="[[+search_albums_url]]">[[%sekug.album.search]]</a></li>`:else=``]]
+    [[+my_favorites_url:gt=``:then=`<li><a href="[[+my_favorites_url]]">[[%sekug.favorites.view.my]]</a></li>`:else=``]]
     [[+browse_galleries_url:gt=``:then=`<li><a href="[[+browse_galleries_url]]">[[%sekug.gallery.browse]]</a></li>`:else=``]]
     [[+my_gallery_url:gt=``:then=`<li><a href="[[+my_gallery_url]]">[[%sekug.gallery.view.my]]</a></li>`:else=``]]
     [[+edit_gallery_url:gt=``:then=`<li><a href="[[+edit_gallery_url]]">[[%sekug.gallery.edit.settings]]</a></li>`:else=``]]
@@ -11,3 +12,4 @@
     `:else=``]]
     [[+directory_stats_url:gt=``:then=`<li><a href="[[+directory_stats_url]]">[[%sekug.directory.statistics]]</a></li>`:else=``]]
 </ul>
+[[!favorites.panel]]

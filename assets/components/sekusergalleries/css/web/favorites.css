@@ -1,0 +1,31 @@
+#favoritesWrap {
+    margin: 10px;
+    background-color: #EBEBEB;
+    padding-bottom: 5px;
+}
+
+#favoriteTitleWrap {
+    background-color: #669900;
+    border: 3px #CCCCCC solid;
+    padding: 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+    height: 20px;
+}
+
+#favoriteListWrap img {
+    border: 0;
+}
+
+#favoriteListWrap ul {
+    list-style-type: none;
+    list-style-position: outside;
+    margin: 0;
+    padding: 0;
+}
+
+#favoriteListWrap li {
+    background-color: #ffffff;
+    margin: 5px;
+    font-size: 12px;
+}

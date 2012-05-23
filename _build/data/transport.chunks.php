@@ -193,4 +193,49 @@ $chunks[19]->fromArray(array(
     'properties' => '',
 ),'',true,true);
 
+$chunks[20]= $modx->newObject('modChunk');
+$chunks[20]->fromArray(array(
+    'id' => 20,
+    'name' => 'album.form.primary',
+    'description' => 'Displays the required and recommended album field inputs.',
+    'snippet' => file_get_contents($sources['elements'].'/chunks/album.form.primary.chunk.tpl'),
+    'properties' => '',
+),'',true,true);
+
+$chunks[21]= $modx->newObject('modChunk');
+$chunks[21]->fromArray(array(
+    'id' => 21,
+    'name' => 'album.form.optional',
+    'description' => 'Displays the optional album field inputs.',
+    'snippet' => file_get_contents($sources['elements'].'/chunks/album.form.optional.chunk.tpl'),
+    'properties' => '',
+),'',true,true);
+
+$chunks[22]= $modx->newObject('modChunk');
+$chunks[22]->fromArray(array(
+    'id' => 22,
+    'name' => 'favorites.panel.container',
+    'description' => 'Favorites panel container.',
+    'snippet' => file_get_contents($sources['elements'].'/chunks/favorites.panel.container.chunk.tpl'),
+    'properties' => '',
+),'',true,true);
+
+$chunks[23]= $modx->newObject('modChunk');
+$chunks[23]->fromArray(array(
+    'id' => 23,
+    'name' => 'favorites.panel.row',
+    'description' => 'Favorites panel line item.',
+    'snippet' => file_get_contents($sources['elements'].'/chunks/favorites.panel.row.chunk.tpl'),
+    'properties' => '',
+),'',true,true);
+
+$chunks[24]= $modx->newObject('modChunk');
+$chunks[24]->fromArray(array(
+    'id' => 24,
+    'name' => 'favorites.view',
+    'description' => 'View favorites container.',
+    'snippet' => file_get_contents($sources['elements'].'/chunks/favorites.view.chunk.tpl'),
+    'properties' => '',
+),'',true,true);
+
 return $chunks;

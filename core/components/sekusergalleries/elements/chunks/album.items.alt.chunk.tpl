@@ -1,6 +1,5 @@
 <li>[[!sekfancybox?
     &type=`media`
-    &loadjquery=`1`
     &mousewheel=`1`
     &thumbnailhelper=`1`
     &modalclass=`altimglink`

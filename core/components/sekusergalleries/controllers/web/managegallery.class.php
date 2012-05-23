@@ -242,7 +242,7 @@ class sekugManageGalleryController extends sekugController {
         $jsUrl = $this->sekug->config['jsUrl'].'web/';
 
         if($loadjquery == 1){
-            $this->modx->regClientStartupScript($jsUrl.'libs/jquery-1.7.1.min.js');
+            $this->modx->regClientStartupScript($jsUrl.'libs/'.$this->sekug->config['jqueryFile']);
         }
         if($customcss>''){
             $this->modx->regClientCSS($this->modx->getOption('assets_url').$customcss);

@@ -1,3 +1,11 @@
+sekUserGalleries 0.0.4
+====================================
+- Added favorites
+- Update title and description button for album items
+- Use sekFormTools for several form items
+- Use sekSiteTools for update album form
+- Updated jquery to 1.7.2
+
 sekUserGalleries 0.0.3
 ====================================
 - Added work around to get mime type if finfo or mime_content_type functions don't exist

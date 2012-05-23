@@ -21,15 +21,15 @@
  */
 
 class sekugAlbumItemsRemoveProcessor extends sekugProcessor {
-    /** @var $album */
-    public $album;
+    /** @var $albumitem */
+    public $albumitem;
 
     /**
      * @return boolean|string
      */
     public function process() {
-        $this->album = $this->modx->getObject('sekugAlbumItems',$_REQUEST['item']);
-        if (!$this->album->remove()) {
+        $this->albumitem = $this->modx->getObject('sekugAlbumItems',$_REQUEST['item']);
+        if (!$this->albumitem->remove()) {
             $this->modx->log(modX::LOG_LEVEL_ERROR,'[sekUserGalleries] Could not remove album item by user: '.$this->modx->user->get('username').' item '.$this->getProperty('id'));
             return $this->modx->lexicon('sekug.albumitem_err_remove');
         }

@@ -19,7 +19,6 @@
  *
  * @package sekusergalleries
  */
-
 class sekugAlbumItemsUpdateProcessor extends sekugProcessor {
     /** @var $albumitem */
     public $albumitem;
@@ -46,8 +45,7 @@ class sekugAlbumItemsUpdateProcessor extends sekugProcessor {
     public function setAlbumItemFields() {
         $fields = $this->dictionary->toArray();
         /* set albumitem */
-        $this->albumitem->item_title = $fields['item_title'];
-        $this->albumitem->item_description = $fields['item_description'];
+        $this->albumitem->fromArray($fields);
     }
 }
 return 'sekugAlbumItemsUpdateProcessor';

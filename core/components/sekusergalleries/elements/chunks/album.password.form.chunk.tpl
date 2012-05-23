@@ -8,7 +8,7 @@
             <label for="password">[[%password]]
                 <span class="error">[[+error.password]]</span>
             </label>
-            <input type="password" name="password" id="password" value="" />
+            <input type="password" name="password" id="password" class="ui-widget ui-widget-content ui-corner-all" value="" />
 
             <input type="submit" name="submit" value="[[%sekug.album.view]]" />
         </form>

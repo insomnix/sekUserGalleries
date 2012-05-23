@@ -48,4 +48,7 @@ $output .= $created ? 'sekugMimeTypes Table created.<br />' : 'sekugMimeTypes Ta
 $created = $m->createObjectContainer('sekugReportAbuse');
 $output .= $created ? 'sekugReportAbuse Table created.<br />' : 'sekugReportAbuse Table not created.<br />';
 
+$created = $m->createObjectContainer('sekugFavorites');
+$output .= $created ? 'sekugFavorites Table created.<br />' : 'sekugFavorites Table not created.<br />';
+
 return $output;

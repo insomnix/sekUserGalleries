@@ -2,7 +2,7 @@
     <div id="sekug_content">
         <form id="fileupload" action="[[+album_upload_url]]" method="POST" enctype="multipart/form-data">
             <div class="row fileupload-buttonbar">
-                <div class="span7">
+                <div class="span">
                     <!-- The fileinput-button span is used to style the file input field as button -->
                     <span class="btn btn-success fileinput-button">
                         <span><i class="icon-plus icon-white"></i> [[%sekug.addfiles...]]</span>
@@ -21,11 +21,15 @@
 
                     <input type="checkbox" class="toggle">
                 </div>
-                <div class="span5">
+                <div class="span4">
                     <!-- The global progress bar -->
                     <div class="progress progress-success progress-striped active fade">
                         <div class="bar" style="width:0%;"></div>
                     </div>
+                </div>
+                <div class="span">
+                    <a href="[[+update_album_url]]#optional" class="btn">[[%sekug.settings.additional]]</a>
+                    <a href="[[+my_gallery_url]]" class="btn">[[%sekug.gallery.backto]]</a>
                 </div>
             </div>
             <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>

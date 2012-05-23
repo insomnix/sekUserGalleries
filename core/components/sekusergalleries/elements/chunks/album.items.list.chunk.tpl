@@ -1,20 +1,26 @@
 <li>
 <ul>
-<li>[[!sekfancybox?
+<li>[[+primary_image:isequalto=``:then=`<img src="[[+thumbnail_image]]" alt="[[+item_title]]" />`:else=`
+    [[!sekfancybox?
     &type=`media`
-    &loadjquery=`1`
     &mousewheel=`1`
     &thumbnailhelper=`1`
     &group=`album`
     &title=`[[+item_title]]`
-    &linktext=`<img src="[[+thumbnail_image]]" alt="[[+item_title]]" />`
-    &link=`[[+primary_image]]`]] </li>
+    &linktext=`<div class="" id="productImageWrapID_[[+id]]"><img src="[[+thumbnail_image]]" alt="[[+item_title]]" /></div>`
+    &link=`[[+primary_image]]`]]
+    `]]</li>
 <li><h5>[[+item_title]]</h5></li>
 <li>[[+item_description]]</li>
 <li>[[!sekfancybox?
     &type=`document`
-    &loadjquery=`1`
     &linktext=`Image Details`
     &link=`[[+image_info_url]]`]] </li>
 [[+alt_images]]
+[[+add_favorite_url:gt=``:then=`
+<li><div class="favorite_link">
+    <a href="[[+add_favorite_url]]" id="item_[[+id]]" onClick="return false;">
+        [[%sekug.favorites.add]]
+    </a>
+</div></li>`:else=``]]
 </ul>

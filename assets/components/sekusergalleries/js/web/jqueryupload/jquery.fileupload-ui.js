@@ -440,17 +440,14 @@
 
         _updateHandler: function (e) {
             e.preventDefault();
-            var button = $(this);
-/*            var button = $(this),
+            var button = $(this),
                 template = button.closest('.template-download'),
-                data = template.data('data');
-            if (data && data.submit && !data.jqXHR && data.submit()) {
-                button.prop('disabled', true);
-            }*/
+                data = template.find('input, select, textarea').serializeArray();
 
+            var url = button.attr('data-url') + '&' + jQuery.param(data);
             e.data.fileupload._trigger('update', e, {
                 context: button.closest('.template-download'),
-                url: button.attr('data-url'),
+                url: url,
                 type: button.attr('data-type'),
                 dataType: e.data.fileupload.options.dataType
             });

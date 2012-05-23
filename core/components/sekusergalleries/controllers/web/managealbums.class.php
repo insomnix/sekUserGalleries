@@ -186,7 +186,8 @@ class sekugManageAlbumsController extends sekugController {
         }
         $this->setPlaceholder('thumbcomboboxwidth',$this->modx->getOption('sekusergalleries.image_thumb_max_width') + 50);
 		$this->setPlaceholder('question_image',$this->sekug->config['imagesUrl'].'/question1.png');
-		$this->modx->lexicon->load('sekusergalleries:default');
+        $this->setPlaceholder('css_url',$this->sekug->config['cssUrl'].'web/');
+        $this->modx->lexicon->load('sekusergalleries:default');
         if($this->getProperty('action') == 'del'){
             return $this->sekug->getChunk($this->getProperty('tplDeleteConfirmation'),$this->getPlaceholders());
         }else{
@@ -239,21 +240,14 @@ class sekugManageAlbumsController extends sekugController {
         $jsUrl = $this->sekug->config['jsUrl'].'web/';
 
         if($loadjquery == 1){
-            $this->modx->regClientStartupScript($jsUrl.'libs/jquery-1.7.1.min.js');
+            $this->modx->regClientStartupScript($jsUrl.'libs/'.$this->sekug->config['jqueryFile']);
         }
         if($customcss>''){
             $this->modx->regClientCSS($this->modx->getOption('assets_url').$customcss);
         } else {
             $this->modx->regClientCSS($cssUrl.'gallery.structure.css');
         }
-		$this->modx->regClientStartupScript($jsUrl.'libs/jquery-ui-1.8.17.custom.min.js');
-		$this->modx->regClientCSS($cssUrl.'smoothness/jquery-ui-1.8.17.custom.css');
-		$datepicker = '<script>
-				$(function() {
-					$( ".datepicker" ).datepicker();
-				});
-			</script>';
-		$this->modx->regClientScript($datepicker);
+
     }
 
 }

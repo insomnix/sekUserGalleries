@@ -62,6 +62,7 @@
 		<field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00" />
 
 		<aggregate alias="sekugAlbums" class="sekugAlbums" local="album_id" foreign="id" cardinality="one" owner="foreign"/>
+        <composite alias="sekugFavorites" class="sekugFavorites" local="id" foreign="item_id" cardinality="many" owner="local" />
     </object>
 
     <!-- image size creation -->
@@ -96,5 +97,14 @@
 		<field key="resolved" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
 		<field key="notes" dbtype="text" phptype="string" null="false" default="" />
     </object>
-	
+
+    <!-- favorites -->
+    <object class="sekugFavorites" table="sekug_favorites" extends="xPDOSimpleObject">
+        <field key="user_id" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="item_id" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
+
+        <aggregate alias="modUser" class="modUser" local="gallery_user" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="sekugAlbumItems" class="sekugAlbumItems" local="item_id" foreign="id" cardinality="one" owner="foreign"/>
+    </object>
+
 </model>

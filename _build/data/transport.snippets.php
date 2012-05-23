@@ -123,4 +123,28 @@ $snippets[12]->fromArray(array(
     'snippet' => getSnippetContent($sources['elements'].'snippets/snippet.users.gallery.view.php'),
 ),'',true,true);
 
+$snippets[13]= $modx->newObject('modSnippet');
+$snippets[13]->fromArray(array(
+    'id' => 13,
+    'name' => 'favorites.display',
+    'description' => 'Display favorites.',
+    'snippet' => getSnippetContent($sources['elements'].'snippets/snippet.favorites.display.php'),
+),'',true,true);
+
+$snippets[14]= $modx->newObject('modSnippet');
+$snippets[14]->fromArray(array(
+    'id' => 14,
+    'name' => 'favorites.helper',
+    'description' => 'Behind the scene helper item to save images to the favorites.',
+    'snippet' => getSnippetContent($sources['elements'].'snippets/snippet.favorites.helper.php'),
+),'',true,true);
+
+$snippets[15]= $modx->newObject('modSnippet');
+$snippets[15]->fromArray(array(
+    'id' => 15,
+    'name' => 'favorites.panel',
+    'description' => 'Panel to hold the favorites list.',
+    'snippet' => getSnippetContent($sources['elements'].'snippets/snippet.favorites.panel.php'),
+),'',true,true);
+
 return $snippets;

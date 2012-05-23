@@ -19,7 +19,6 @@
  *
  * @package sekusergalleries
  */
-
 class sekugViewAlbumController extends sekugController {
     /**
      * Initialize this controller, setting up default properties
@@ -74,13 +73,13 @@ class sekugViewAlbumController extends sekugController {
                         'max_width' => $sizeArray['max_width'],
                         'max_height' => $sizeArray['max_height'],
                         'image_quality' => $sizeArray['image_quality'],
-                        'watermark_image' => ($sizeArray['watermark_image']>'') ? $watermark_folder . $sizeArray['watermark_image'] : '',
-                        'watermark_text' => $sizeArray['watermark_text'],
-                        'watermark_text_color' => $sizeArray['watermark_text_color'],
-                        'watermark_font' => $sizeArray['watermark_font'],
-                        'watermark_font_size' => $sizeArray['watermark_font_size'],
-                        'watermark_location' => $sizeArray['watermark_location'],
-                        'watermark_brightness' => $sizeArray['watermark_brightness'],
+                        //'watermark_image' => ($sizeArray['watermark_image']>'') ? $watermark_folder . $sizeArray['watermark_image'] : '',
+                        //'watermark_text' => $sizeArray['watermark_text'],
+                        //'watermark_text_color' => $sizeArray['watermark_text_color'],
+                        //'watermark_font' => $sizeArray['watermark_font'],
+                        //'watermark_font_size' => $sizeArray['watermark_font_size'],
+                        //'watermark_location' => $sizeArray['watermark_location'],
+                        //'watermark_brightness' => $sizeArray['watermark_brightness'],
                         'primary' => $sizeArray['primary']
                     );
                 }
@@ -98,11 +97,11 @@ class sekugViewAlbumController extends sekugController {
                             $alt_images .= $this->sekug->getChunk($this->getProperty('tplAltItems'),$imageArray);
                         }
                     }
+                    $itemArray['add_favorite_url'] = ($this->modx->getOption('sekusergalleries.favorites_helper_resource_id')>'') ? $this->modx->makeUrl($this->modx->getOption('sekusergalleries.favorites_helper_resource_id'),'',array('action' => 'addToFavorites','albumItemID' => $itemArray['id'])) : '';;
                     $itemArray['primary_image'] = $primary_image;
                     $itemArray['alt_images'] = $alt_images;
                     $itemArray['thumbnail_image'] = $baseAlbumUrl . 'thumb/' . $itemArray['file_name'] . '.' .$itemArray['file_ext_resize'];
                     $itemArray['image_info_url'] = $this->modx->makeUrl($this->modx->getOption('sekusergalleries.image_info_resource_id'),'',array('item' => $itemArray['id']));
-                    //$itemArray['alpha_image'] = $storeAlbumPath . 'alpha/' . $itemArray['file_name'] . '.' .$itemArray['file_ext'];
                     $albumItems .= $this->sekug->getChunk($this->getProperty('tplAlbumItems'),$itemArray);
                 }
                 $album['item_list'] = $albumItems;
@@ -135,7 +134,7 @@ class sekugViewAlbumController extends sekugController {
         $jsUrl = $this->sekug->config['jsUrl'].'web/';
 
         if($loadjquery == 1){
-            $this->modx->regClientStartupScript($jsUrl.'libs/jquery-1.7.1.min.js');
+            $this->modx->regClientStartupScript($jsUrl.'libs/'.$this->sekug->config['jqueryFile']);
         }
         if($customcss>''){
             $this->modx->regClientCSS($this->modx->getOption('assets_url').$customcss);

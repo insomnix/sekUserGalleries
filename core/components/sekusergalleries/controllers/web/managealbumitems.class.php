@@ -1,27 +1,25 @@
 <?php
-    /**
-     * User Galleries
-     *
-     * Copyright 2012 by Stephen Smith <ssmith@seknetsolutions.com>
-     *
-     * sekUserGalleries is free software; you can redistribute it and/or modify it
-     * under the terms of the GNU General Public License as published by the Free
-     * Software Foundation; either version 2 of the License, or (at your option) any
-     * later version.
-     *
-     * sekUserGalleries is distributed in the hope that it will be useful, but WITHOUT ANY
-     * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
-     * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-     *
-     * You should have received a copy of the GNU General Public License along with
-     * sekUserGalleries; if not, write to the Free Software Foundation, Inc., 59 Temple
-     * Place, Suite 330, Boston, MA 02111-1307 USA
-     *
-     * @package sekusergalleries
-     */
-
+/**
+ * User Galleries
+ *
+ * Copyright 2012 by Stephen Smith <ssmith@seknetsolutions.com>
+ *
+ * sekUserGalleries is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * sekUserGalleries is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * sekUserGalleries; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * Place, Suite 330, Boston, MA 02111-1307 USA
+ *
+ * @package sekusergalleries
+ */
 class sekugManageAlbumItemsController extends sekugController {
-
     /**
      * Initialize this controller, setting up default properties
      * @return void
@@ -63,6 +61,8 @@ class sekugManageAlbumItemsController extends sekugController {
             $album['album_description'] = $sekug_album->get('album_description');
             $album['album_upload_url'] = $this->modx->makeUrl($this->modx->getOption('sekusergalleries.items_helper_resource_id'),'',array('album' => $sekug_album->get('id')));
 
+            $album['my_gallery_url'] =  ($this->modx->getOption('sekusergalleries.usersgallery_resource_id')>'') ? $this->modx->makeUrl($this->modx->getOption('sekusergalleries.usersgallery_resource_id')) : '';
+            $album['update_album_url'] =  ($this->modx->getOption('sekusergalleries.album_manage_resource_id')>'') ? $this->modx->makeUrl($this->modx->getOption('sekusergalleries.album_manage_resource_id'),'',array('album' => $sekug_album->get('id'))) : '';
             $output = $this->sekug->getChunk($this->getProperty('tplItemsForm'),$album);
         }else{
             $output = $this->modx->lexicon('sekug.album.not.exist');
@@ -79,7 +79,7 @@ class sekugManageAlbumItemsController extends sekugController {
         $jsUrl = $this->sekug->config['jsUrl'].'web/';
 
         if($loadjquery == 1){
-            $this->modx->regClientStartupScript($jsUrl.'libs/jquery-1.7.1.min.js');
+            $this->modx->regClientStartupScript($jsUrl.'libs/'.$this->sekug->config['jqueryFile']);
         }
         if($customcss>''){
             $this->modx->regClientCSS($this->modx->getOption('assets_url').$customcss);

@@ -28,6 +28,7 @@ $tplNav = $modx->getOption('tplNav',$scriptProperties,'navigation');
 
 $nav['album_id'] = $album_id;
 $nav['search_albums_url'] =  ($modx->getOption('sekusergalleries.album_search_resource_id')>'') ? $modx->makeUrl($modx->getOption('sekusergalleries.album_search_resource_id')) : '';
+$nav['my_favorites_url'] =  ($modx->getOption('sekusergalleries.favorites_resource_id')>'') ? $modx->makeUrl($modx->getOption('sekusergalleries.favorites_resource_id')) : '';
 $nav['browse_galleries_url'] = ($modx->getOption('sekusergalleries.browsegalleries_resource_id')>'') ? $modx->makeUrl($modx->getOption('sekusergalleries.browsegalleries_resource_id')) : '';
 $nav['my_gallery_url'] =  ($modx->getOption('sekusergalleries.usersgallery_resource_id')>'') ? $modx->makeUrl($modx->getOption('sekusergalleries.usersgallery_resource_id')) : '';
 $nav['edit_gallery_url'] =  ($modx->getOption('sekusergalleries.editgallery_resource_id')>'') ? $modx->makeUrl($modx->getOption('sekusergalleries.editgallery_resource_id')) : '';

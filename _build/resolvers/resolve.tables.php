@@ -19,7 +19,6 @@
  *
  * @package sekusergalleries
  */
- 
 if ($object->xpdo) {
     switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         case xPDOTransport::ACTION_INSTALL:
@@ -37,6 +36,7 @@ if ($object->xpdo) {
             $manager->createObjectContainer('sekugImageSizes');
             $manager->createObjectContainer('sekugMimeTypes');
             $manager->createObjectContainer('sekugReportAbuse');
+            $manager->createObjectContainer('sekugFavorites');
 
             break;
         case xPDOTransport::ACTION_UPGRADE:

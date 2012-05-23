@@ -122,6 +122,24 @@ $settings['sekusergalleries.directory_stats_resource_id']->fromArray(array(
     'area' => '',
 ),'',true,true);
 
+$settings['sekusergalleries.favorites_resource_id']= $modx->newObject('modSystemSetting');
+$settings['sekusergalleries.favorites_resource_id']->fromArray(array(
+    'key' => 'sekusergalleries.favorites_resource_id',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => $namespace,
+    'area' => '',
+),'',true,true);
+
+$settings['sekusergalleries.favorites_helper_resource_id']= $modx->newObject('modSystemSetting');
+$settings['sekusergalleries.favorites_helper_resource_id']->fromArray(array(
+    'key' => 'sekusergalleries.favorites_helper_resource_id',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => $namespace,
+    'area' => '',
+),'',true,true);
+
 $settings['sekusergalleries.gallerycover_thumb_max_width']= $modx->newObject('modSystemSetting');
 $settings['sekusergalleries.gallerycover_thumb_max_width']->fromArray(array(
     'key' => 'sekusergalleries.gallerycover_thumb_max_width',

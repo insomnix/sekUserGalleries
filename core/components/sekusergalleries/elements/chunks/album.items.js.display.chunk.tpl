@@ -27,22 +27,18 @@
 ]]<br />
 {%=o.formatFileSize(file.size)%}
 </td>
-<td class="name">
-<form>
-    <input type="hidden" name="id[{%=file.id%}]" id="item_id" value="{%=file.id%}" />
-    <label for="item_title">[[%sekug.title]]</label>
-    <input type="text" name="item_title[{%=file.id%}]" id="item_title" value="{%=file.title%}" />
-    <label for="item_description">[[%sekug.description]]</label>
-    <textarea cols="65" rows="2" name="item_description[{%=file.id%}]" id="item_description" value="{%=file.description%}">{%=file.description%}</textarea>
-</form>
-</td>
-            <td></td>
-        <td class="update">
-            <button class="btn btn-primary" data-type="{%=file.update_type%}" data-url="{%=file.update_url%}">
-                <i class="icon-edit icon-white"></i> [[%sekug.update]]
-            </button>
-        </td>
-
+    <td class="name">
+        <input type="hidden" name="id[{%=file.id%}]" id="item_id" value="{%=file.id%}" />
+        <label for="item_title">[[%sekug.title]]</label>
+        <input type="text" name="item_title[{%=file.id%}]" id="item_title" value="{%=file.title%}" />
+        <label for="item_description">[[%sekug.description]]</label>
+        <textarea cols="65" rows="2" name="item_description[{%=file.id%}]" id="item_description" value="{%=file.description%}">{%=file.description%}</textarea>
+    </td>
+    <td class="update">
+        <button class="btn btn-primary" data-type="{%=file.update_type%}" data-url="{%=file.update_url%}">
+            <i class="icon-edit icon-white"></i> [[%sekug.update]]
+        </button>
+    </td>
         {% } %}
 
         <td class="delete">

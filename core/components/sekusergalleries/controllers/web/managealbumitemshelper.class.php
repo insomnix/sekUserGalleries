@@ -404,9 +404,12 @@ class sekugManageAlbumItemsHelperController extends sekugController {
         if (!$this->loadDictionary()) {
             return 'no Dictionary';
         }
-
-        $this->dictionary->set('item_title',$_POST['item_title'][$_REQUEST['item']]);
-        $this->dictionary->set('item_description',$_POST['item_description'][$_REQUEST['item']]);
+        //$this->modx->log(modX::LOG_LEVEL_ERROR,'[sekUserGalleries]: req'.print_r($_REQUEST,true));
+        //$this->modx->log(modX::LOG_LEVEL_ERROR,'[sekUserGalleries]: '.$_REQUEST['item_title'][$_REQUEST['item']]);
+        //$this->modx->log(modX::LOG_LEVEL_ERROR,'[sekUserGalleries]: '.$_REQUEST['item_description'][$_REQUEST['item']]);
+        $this->dictionary->set('item_id',$_REQUEST['item']);
+        $this->dictionary->set('item_title',$_REQUEST['item_title'][$_REQUEST['item']]);
+        $this->dictionary->set('item_description',$_REQUEST['item_description'][$_REQUEST['item']]);
 
         $fields = $this->validateFields();
         $this->dictionary->reset();

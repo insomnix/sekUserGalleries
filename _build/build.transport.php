@@ -19,7 +19,6 @@
  *
  * @package sekusergalleries
  */
- 
 $tstart = explode(' ', microtime());
 $tstart = $tstart[1] + $tstart[0];
 set_time_limit(0);
@@ -27,7 +26,7 @@ set_time_limit(0);
 /* define package names */
 define('PKG_NAME','sekUserGalleries');
 define('PKG_NAME_LOWER','sekusergalleries');
-define('PKG_VERSION','0.0.3');
+define('PKG_VERSION','0.0.4');
 define('PKG_RELEASE','BETA');
  
 /* define build paths */
@@ -76,6 +75,32 @@ $modx->log(modX::LOG_LEVEL_INFO,'Packaging in chunks...');
 $chunks = include $sources['data'].'transport.chunks.php';
 if (empty($chunks)) $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in chunks.');
 $category->addMany($chunks);
+
+/* add plugins */
+$modx->log(modX::LOG_LEVEL_INFO,'Packaging plugin...');
+$attr = array(
+    xPDOTransport::PRESERVE_KEYS => false,
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::UNIQUE_KEY => 'name',
+);
+$plugin = $modx->newObject('modPlugin');
+$plugin->fromArray(array(
+    'id' => 0,
+    'name' => 'sekugLogin',
+    'description' => 'User Galleries login events.',
+),'',true,true);
+$plugin->set('plugincode', file_get_contents($sources['source_core'].'/elements/plugins/plugin.sekugLogin.php'));
+$vehicle = $builder->createVehicle($plugin, $attr);
+
+$modx->log(modX::LOG_LEVEL_INFO,'Adding resolvers to plugin...');
+$vehicle->resolve('file',array(
+    'source' => $sources['source_core'],
+    'target' => "return MODX_CORE_PATH . 'components/';",
+));
+$vehicle->resolve('php',array(
+    'source' => $sources['resolvers'].'resolve.plugin_events.php',
+));
+$builder->putVehicle($vehicle);
 
 // load system settings
 $settings = array();

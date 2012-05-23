@@ -12,7 +12,7 @@
     text-align:center;
 }
 .dd .ddTitle span.arrow {
-	background:url(dd_arrow.gif) no-repeat 0 0; float:right; display:inline-block;width:16px; height:16px; cursor:pointer;
+	background:url(../../images/dd_arrow.gif) no-repeat 0 0; float:right; display:inline-block;width:16px; height:16px; cursor:pointer;
 }
 .dd .ddTitle span.ddTitleText {text-indent:1px; overflow:hidden; line-height:16px; display: block;}
 .dd .ddTitle span.ddTitleText img{text-align:left; padding:0 2px 0 0}
