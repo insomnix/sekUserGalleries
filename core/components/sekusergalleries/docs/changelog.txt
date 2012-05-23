@@ -1,3 +1,7 @@
+sekUserGalleries 0.0.5
+====================================
+- Added favorites table resolver to installer
+
 sekUserGalleries 0.0.4
 ====================================
 - Added favorites
