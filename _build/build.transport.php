@@ -26,7 +26,7 @@ set_time_limit(0);
 /* define package names */
 define('PKG_NAME','sekUserGalleries');
 define('PKG_NAME_LOWER','sekusergalleries');
-define('PKG_VERSION','0.0.5');
+define('PKG_VERSION','0.0.6');
 define('PKG_RELEASE','BETA');
  
 /* define build paths */

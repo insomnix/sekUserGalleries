@@ -60,6 +60,8 @@ if($user_id > 0){
             $favoriteArray = $favorite->toArray();
             $favoriteArray['item_title'] = $favorite->sekugAlbumItems->get('item_title');
             $favoriteArray['file_name'] = $favorite->sekugAlbumItems->get('file_name');
+            $favoriteArray['remove_fav_img'] = $sekug->config['imagesUrl'].'delete.png';
+            $favoriteArray['remove_favorite_url'] = ($modx->getOption('sekusergalleries.favorites_helper_resource_id')>'') ? $modx->makeUrl($modx->getOption('sekusergalleries.favorites_helper_resource_id'),'',array('action' => 'removeFromFavorites','albumItemID' => $favorite->sekugAlbumItems->get('id'))) : '';
             $favoriteItems .= $sekug->getChunk($tplRow,$favoriteArray);
         }
         $favorites['items'] = $favoriteItems;
@@ -73,6 +75,8 @@ if($_SESSION['sekug_favorites'] != null){
         if($albumItem){
             $favoriteArray['item_title'] = $albumItem->get('item_title');
             $favoriteArray['file_name'] = $albumItem->get('file_name');
+            $favoriteArray['remove_fav_img'] = $sekug->config['imagesUrl'].'delete.png';
+            $favoriteArray['remove_favorite_url'] = ($modx->getOption('sekusergalleries.favorites_helper_resource_id')>'') ? $modx->makeUrl($modx->getOption('sekusergalleries.favorites_helper_resource_id'),'',array('action' => 'removeFromFavorites','albumItemID' => $albumItem->get('id'))) : '';
 
             $favoriteItems .= $sekug->getChunk($tplRow,$favoriteArray);
         }else{

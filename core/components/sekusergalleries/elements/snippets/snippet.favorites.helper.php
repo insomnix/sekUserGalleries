@@ -62,6 +62,9 @@ if ($action == "addToFavorites"){
     $favoriteArray['item_id'] = $item_id;
     $favoriteArray['item_title'] = $albumItem->get('item_title');
     $favoriteArray['file_name'] = $albumItem->get('file_name');
+    $favoriteArray['remove_fav_img'] = $sekug->config['imagesUrl'].'delete.png';
+    $favoriteArray['remove_favorite_url'] = ($modx->getOption('sekusergalleries.favorites_helper_resource_id')>'') ? $modx->makeUrl($modx->getOption('sekusergalleries.favorites_helper_resource_id'),'',array('action' => 'removeFromFavorites','albumItemID' => $albumItem->get('id'))) : '';
+
     // return the item to display in the favorite panel
     $favoriteItems .= $sekug->getChunk($tplRow,$favoriteArray);
 

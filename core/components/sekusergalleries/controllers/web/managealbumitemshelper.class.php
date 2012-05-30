@@ -127,7 +127,7 @@ class sekugManageAlbumItemsHelperController extends sekugController {
         header('Content-Disposition: inline; filename="files.json"');
         header('X-Content-Type-Options: nosniff');
         header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Methods: OPTIONS, HEAD, GET, POST, PUT, DELETE, UPDATE');
+        header('Access-Control-Allow-Methods: OPTIONS, HEAD, GET, POST, PUT');
         header('Access-Control-Allow-Headers: X-File-Name, X-File-Type, X-File-Size');
 
         // start the image handler class
@@ -140,14 +140,20 @@ class sekugManageAlbumItemsHelperController extends sekugController {
                 return $this->getFiles();
                 break;
             case 'POST':
-                return $this->uploadFiles();
+                if (isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'DELETE') {
+                    return $this->deleteFiles();
+                } elseif (isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'UPDATE') {
+                    return $this->updateFiles();
+                } else {
+                    return $this->uploadFiles();
+                }
                 break;
-            case 'DELETE':
+/*            case 'DELETE':
                 return $this->deleteFiles();
                 break;
             case 'UPDATE':
                 return $this->updateFiles();
-                break;
+                break;*/
             default:
                 header('HTTP/1.1 405 Method Not Allowed');
         }
@@ -205,10 +211,10 @@ class sekugManageAlbumItemsHelperController extends sekugController {
                     $file->primary_url = $display_gallery_url.$this->imgconfig['image_versions'][$index]['name'].'/'.$file->name;
                 }
             }
-            $file->update_url = $this->modx->makeUrl($this->modx->getOption('sekusergalleries.items_helper_resource_id'),'',array('album' => $this->getProperty('album'), 'item' => $itemArray['id']));
-            $file->update_type = 'UPDATE';
-            $file->delete_url = $this->modx->makeUrl($this->modx->getOption('sekusergalleries.items_helper_resource_id'),'',array('album' => $this->getProperty('album'), 'item' => $itemArray['id']));
-            $file->delete_type = 'DELETE';
+            $file->update_url = $this->modx->makeUrl($this->modx->getOption('sekusergalleries.items_helper_resource_id'),'',array('album' => $this->getProperty('album'), 'item' => $itemArray['id'], '_method' => 'UPDATE'));
+            $file->update_type = 'POST';//'UPDATE';
+            $file->delete_url = $this->modx->makeUrl($this->modx->getOption('sekusergalleries.items_helper_resource_id'),'',array('album' => $this->getProperty('album'), 'item' => $itemArray['id'], '_method' => 'DELETE'));
+            $file->delete_type = 'POST';//'DELETE';
             return $file;
         }
         return null;
@@ -272,9 +278,9 @@ class sekugManageAlbumItemsHelperController extends sekugController {
                     }
                 }
                 $file->update_url = $this->modx->makeUrl($this->modx->getOption('sekusergalleries.items_helper_resource_id'),'',array('album' => $this->getProperty('album'), 'item' => $file->id));
-                $file->update_type = 'UPDATE';
+                $file->update_type = 'POST';//'UPDATE';
                 $file->delete_url = $this->modx->makeUrl($this->modx->getOption('sekusergalleries.items_helper_resource_id'),'',array('album' => $this->getProperty('album'), 'item' => $file->id));
-                $file->delete_type = 'DELETE';
+                $file->delete_type = 'POST';//'DELETE';
 
                 return $file;
             }

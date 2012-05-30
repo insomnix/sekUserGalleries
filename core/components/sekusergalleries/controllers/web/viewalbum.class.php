@@ -97,7 +97,7 @@ class sekugViewAlbumController extends sekugController {
                             $alt_images .= $this->sekug->getChunk($this->getProperty('tplAltItems'),$imageArray);
                         }
                     }
-                    $itemArray['add_favorite_url'] = ($this->modx->getOption('sekusergalleries.favorites_helper_resource_id')>'') ? $this->modx->makeUrl($this->modx->getOption('sekusergalleries.favorites_helper_resource_id'),'',array('action' => 'addToFavorites','albumItemID' => $itemArray['id'])) : '';;
+                    $itemArray['add_favorite_url'] = ($this->modx->getOption('sekusergalleries.favorites_helper_resource_id')>'') ? $this->modx->makeUrl($this->modx->getOption('sekusergalleries.favorites_helper_resource_id'),'',array('action' => 'addToFavorites','albumItemID' => $itemArray['id'])) : '';
                     $itemArray['primary_image'] = $primary_image;
                     $itemArray['alt_images'] = $alt_images;
                     $itemArray['thumbnail_image'] = $baseAlbumUrl . 'thumb/' . $itemArray['file_name'] . '.' .$itemArray['file_ext_resize'];
