@@ -178,8 +178,13 @@ class sekugManageAlbumsController extends sekugController {
                     'active_from' => $user_album->get('active_from'),
                     'active_to' => $user_album->get('active_to'),
                     'private' => $user_album->get('private'),
-                    'password' => $user_album->get('password'),
+                    'password' => $user_album->get('password')
                 ));
+                /* get the extended fields */
+                $fields = $user_album->get('extended');
+                foreach ($fields as $k => $v) {
+                    $this->setPlaceholder($k,$v);
+                }
             }else{
                 return $this->modx->lexicon('sekug.notalbumowner');
             }

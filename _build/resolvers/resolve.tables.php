@@ -40,6 +40,14 @@ if ($object->xpdo) {
 
             break;
         case xPDOTransport::ACTION_UPGRADE:
+            $modx =& $object->xpdo;
+            $modelPath = $modx->getOption('sekusergalleries.core_path',null,$modx->getOption('core_path').'components/sekusergalleries/').'model/';
+            $modx->addPackage('sekusergalleries',$modelPath);
+            $manager = $modx->getManager();
+
+            $manager->addField('sekugAlbums','extended');
+            $manager->addField('sekugAlbumItems','extended');
+
             break;
     }
 }

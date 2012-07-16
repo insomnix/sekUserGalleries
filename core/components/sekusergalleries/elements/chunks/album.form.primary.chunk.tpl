@@ -12,3 +12,8 @@
     <span class="error">[[+error.album_keywords]]</span>
 </label>[[!sekfancybox? &link=`keywordsmodal` &linktext=`<img width='20' height='20'  src="[[+question_image]]" />` &header=`[[%sekug.keywords.album]]` &text=`[[%sekug.keywords.album.desc]]`]] <br />
 <textarea cols="55" rows="4" name="album_keywords" id="album_keywords" class="ui-widget ui-widget-content ui-corner-all" value="[[+album_keywords]]">[[+album_keywords]]</textarea><br />
+
+<label for="ext_field">Extended Field
+    <span class="error">[[+error.ext_field]]</span>
+</label><br />
+<input type="text" name="ext_field" id="ext_field" class="ui-widget ui-widget-content ui-corner-all" value="[[+ext_field]]" /><br />

@@ -124,8 +124,8 @@ class sekUserGalleries {
         // Check if the variable is set and if the file itself exists before continuing
         if ((isset($image_path)) and (file_exists($image_path))) {
             // There are 2 arrays which contains the information we are after, so it's easier to state them both
-            $exif_ifd0 = read_exif_data($image_path ,'IFD0' ,0);
-            $exif_exif = read_exif_data($image_path ,'EXIF' ,0);
+            $exif_ifd0 = @read_exif_data($image_path ,'IFD0' ,0);
+            $exif_exif = @read_exif_data($image_path ,'EXIF' ,0);
             //error control
             $notFound = "Unavailable";
             // Make

@@ -201,6 +201,14 @@ class sekugManageAlbumItemsHelperController extends sekugController {
             $file = new stdClass();
             $file->id = $itemArray['id'];
             $file->name = $itemArray['file_name'] . '.' .$itemArray['file_ext_resize'];
+            /* get the extended fields */
+            $fields = $itemArray['extended'];
+            if(is_array($fields)) {
+                foreach ($fields as $k => $v) {
+                    $file->$k = $v;
+                    //$this->modx->log(modX::LOG_LEVEL_ERROR,$k.' = '.$v.' this:'.$this->$k);
+                }
+            }
             $file_path = $this->sekug->config['storeGalleryPath'].$user_id.'/'.$album_id.'/alpha/'.$file->name;
             $file->size = (is_file($file_path)) ? filesize($file_path) : 0;
             $file->title = $itemArray['item_title'];
@@ -211,10 +219,13 @@ class sekugManageAlbumItemsHelperController extends sekugController {
                     $file->primary_url = $display_gallery_url.$this->imgconfig['image_versions'][$index]['name'].'/'.$file->name;
                 }
             }
+
             $file->update_url = $this->modx->makeUrl($this->modx->getOption('sekusergalleries.items_helper_resource_id'),'',array('album' => $this->getProperty('album'), 'item' => $itemArray['id'], '_method' => 'UPDATE'));
             $file->update_type = 'POST';//'UPDATE';
             $file->delete_url = $this->modx->makeUrl($this->modx->getOption('sekusergalleries.items_helper_resource_id'),'',array('album' => $this->getProperty('album'), 'item' => $itemArray['id'], '_method' => 'DELETE'));
             $file->delete_type = 'POST';//'DELETE';
+
+            //$this->modx->log(modX::LOG_LEVEL_ERROR,print_r($file,true));
             return $file;
         }
         return null;
@@ -245,8 +256,19 @@ class sekugManageAlbumItemsHelperController extends sekugController {
         $this->dictionary->set('file_ext',pathinfo($file->name,PATHINFO_EXTENSION));
         $this->dictionary->set('file_ext_resize',$file->resize_ext);
         $this->dictionary->set('album_id',$this->getProperty('album'));
-        $this->dictionary->set('item_title',$_POST['item_title'][$file->name]);
-        $this->dictionary->set('item_description',$_POST['item_description'][$file->name]);
+
+        foreach($_POST as $key=>$value) {
+            if(is_array($value)){
+                foreach($value as $skey=>$svalue) {
+                    if($skey == $file->name){
+                        $this->dictionary->set($key,$svalue);
+                    }
+                    //$this->modx->log(modX::LOG_LEVEL_ERROR,'key: '.$key.',skey: '.$skey.', val: '.$svalue);
+                }
+            }
+        }
+        //$this->dictionary->set('item_title',$_POST['item_title'][$file->name]);
+        //$this->dictionary->set('item_description',$_POST['item_description'][$file->name]);
 
         $storeAlbumPath = $this->sekug->config['storeGalleryPath'] . $user_id . '/' . $album_id . '/';
         $image_path  = $storeAlbumPath . 'alpha/' . $this->dictionary->get('file_name') . '.' . $this->dictionary->get('file_ext');
@@ -268,6 +290,13 @@ class sekugManageAlbumItemsHelperController extends sekugController {
                 $this->modx->setPlaceholder('error.message',$result);
             } else {
                 $this->success = true;
+                /* get the extended fields */
+                $fields = $this->dictionary->toArray();
+                if(is_array($fields)) {
+                    foreach ($fields as $k => $v) {
+                        $file->$k = $v;
+                    }
+                }
                 $file->id = $this->getProperty('albumitem');
                 $file->title = $this->dictionary->get('item_title');
                 $file->description = $this->dictionary->get('item_description');
@@ -414,8 +443,17 @@ class sekugManageAlbumItemsHelperController extends sekugController {
         //$this->modx->log(modX::LOG_LEVEL_ERROR,'[sekUserGalleries]: '.$_REQUEST['item_title'][$_REQUEST['item']]);
         //$this->modx->log(modX::LOG_LEVEL_ERROR,'[sekUserGalleries]: '.$_REQUEST['item_description'][$_REQUEST['item']]);
         $this->dictionary->set('item_id',$_REQUEST['item']);
-        $this->dictionary->set('item_title',$_REQUEST['item_title'][$_REQUEST['item']]);
-        $this->dictionary->set('item_description',$_REQUEST['item_description'][$_REQUEST['item']]);
+        foreach($_REQUEST as $key=>$value) {
+            //$this->modx->log(modX::LOG_LEVEL_ERROR,'key: '.$key.', val: '.$value);
+            if(is_array($value)){
+                foreach($value as $skey=>$svalue) {
+                    $this->dictionary->set($key,$svalue);
+                    //$this->modx->log(modX::LOG_LEVEL_ERROR,'key: '.$key.', val: '.$svalue);
+                }
+            }
+        }
+        //$this->dictionary->set('item_title',$_REQUEST['item_title'][$_REQUEST['item']]);
+        //$this->dictionary->set('item_description',$_REQUEST['item_description'][$_REQUEST['item']]);
 
         $fields = $this->validateFields();
         $this->dictionary->reset();

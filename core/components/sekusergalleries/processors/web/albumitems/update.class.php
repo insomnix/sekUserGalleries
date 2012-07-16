@@ -46,6 +46,22 @@ class sekugAlbumItemsUpdateProcessor extends sekugProcessor {
         $fields = $this->dictionary->toArray();
         /* set albumitem */
         $this->albumitem->fromArray($fields);
+        $fields = $this->dictionary->toArray();
+        $newExtended = array();
+        foreach ($fields as $field => $value) {
+            $isValidExtended = true;
+            if ( empty($value) || $field == 'id' || $field == 'item_id' || $field == 'item_title' || $field == 'item_description') {
+                $isValidExtended = false;
+            }
+
+            if ($isValidExtended) {
+                $newExtended[$field] = $value;
+            }
+        }
+        /* set albumitem */
+        $this->albumitem->fromArray($fields);
+
+        $this->albumitem->set('extended',$newExtended);
     }
 }
 return 'sekugAlbumItemsUpdateProcessor';

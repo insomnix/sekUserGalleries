@@ -59,8 +59,13 @@ if ($action == "addToFavorites"){
 
     // get the file name and item title to display
     $albumItem = $modx->getObject('sekugAlbumItems',$item_id);
+    $album = $modx->getObject('sekugAlbums',$albumItem->get('album_id'));
+
+    $baseAlbumUrl = $sekug->config['displayGalleryUrl'] . $album->get('album_user') . '/' . $albumItem->get('album_id') . '/';
+
     $favoriteArray['item_id'] = $item_id;
     $favoriteArray['item_title'] = $albumItem->get('item_title');
+    $favoriteArray['thumbnail_image'] = $baseAlbumUrl . 'thumb/' . $albumItem->get('file_name') . '.' .$albumItem->get('file_ext_resize');
     $favoriteArray['file_name'] = $albumItem->get('file_name');
     $favoriteArray['remove_fav_img'] = $sekug->config['imagesUrl'].'delete.png';
     $favoriteArray['remove_favorite_url'] = ($modx->getOption('sekusergalleries.favorites_helper_resource_id')>'') ? $modx->makeUrl($modx->getOption('sekusergalleries.favorites_helper_resource_id'),'',array('action' => 'removeFromFavorites','albumItemID' => $albumItem->get('id'))) : '';

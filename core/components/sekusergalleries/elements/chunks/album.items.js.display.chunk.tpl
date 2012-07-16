@@ -33,6 +33,8 @@
         <input type="text" name="item_title[{%=file.id%}]" id="item_title" value="{%=file.title%}" />
         <label for="item_description">[[%sekug.description]]</label>
         <textarea cols="65" rows="2" name="item_description[{%=file.id%}]" id="item_description" value="{%=file.description%}">{%=file.description%}</textarea>
+        <label for="ext_field">Extended Field</label>
+        <input type="text" name="ext_field[{%=file.id%}]" id="ext_field" value="{%=file.ext_field%}" />
     </td>
     <td class="update">
         <button class="btn btn-primary" data-type="{%=file.update_type%}" data-url="{%=file.update_url%}">

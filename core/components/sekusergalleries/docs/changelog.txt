@@ -1,10 +1,14 @@
+sekUserGalleries 0.0.7
+====================================
+- Updated favorites panel to display cropped image
+- Added extended fields to album and album items.
+
 sekUserGalleries 0.0.6
 ====================================
 - Updated favorites panel to fix remove favorite link
 - Delete.png url fixed
 - Changed delete and update methods to post on manage album items
 to resolve issues with some web hosts.
-
 
 sekUserGalleries 0.0.5
 ====================================

@@ -13,6 +13,7 @@ $xpdo_meta_map['sekugAlbumItems']= array (
     'file_ext_resize' => '',
     'createdon' => '0000-00-00 00:00:00',
     'editedon' => '0000-00-00 00:00:00',
+    'extended' => NULL,
   ),
   'fieldMeta' => 
   array (
@@ -84,6 +85,12 @@ $xpdo_meta_map['sekugAlbumItems']= array (
       'null' => false,
       'default' => '0000-00-00 00:00:00',
     ),
+    'extended' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'json',
+      'null' => true,
+    ),
   ),
   'aggregates' => 
   array (
@@ -98,7 +105,7 @@ $xpdo_meta_map['sekugAlbumItems']= array (
   ),
   'composites' => 
   array (
-    'sekugFavorites' =>
+    'sekugFavorites' => 
     array (
       'class' => 'sekugFavorites',
       'local' => 'id',

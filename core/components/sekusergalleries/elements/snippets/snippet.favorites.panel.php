@@ -52,13 +52,16 @@ $user_id = $modx->user->get('id');
 $favoriteItems = '';
 $favorites['items'] = '';
 if($user_id > 0){
-    $sekug_favorite = $modx->getCollectionGraph('sekugFavorites', '{ "sekugAlbumItems":{} }', array(
+    $sekug_favorite = $modx->getCollectionGraph('sekugFavorites', '{ "sekugAlbumItems":{ "sekugAlbums":{} } }', array(
         'user_id' => $user_id
     ));
     if($sekug_favorite != null){
         foreach ($sekug_favorite as $favorite) {
             $favoriteArray = $favorite->toArray();
+            $baseAlbumUrl = $sekug->config['displayGalleryUrl'] . $favorite->sekugAlbumItems->sekugAlbums->get('album_user') . '/' . $favorite->sekugAlbumItems->get('album_id') . '/';
+
             $favoriteArray['item_title'] = $favorite->sekugAlbumItems->get('item_title');
+            $favoriteArray['thumbnail_image'] = $baseAlbumUrl . 'thumb/' . $favorite->sekugAlbumItems->get('file_name') . '.' .$favorite->sekugAlbumItems->get('file_ext_resize');
             $favoriteArray['file_name'] = $favorite->sekugAlbumItems->get('file_name');
             $favoriteArray['remove_fav_img'] = $sekug->config['imagesUrl'].'delete.png';
             $favoriteArray['remove_favorite_url'] = ($modx->getOption('sekusergalleries.favorites_helper_resource_id')>'') ? $modx->makeUrl($modx->getOption('sekusergalleries.favorites_helper_resource_id'),'',array('action' => 'removeFromFavorites','albumItemID' => $favorite->sekugAlbumItems->get('id'))) : '';
@@ -73,7 +76,10 @@ if($_SESSION['sekug_favorites'] != null){
 
         $albumItem = $modx->getObject('sekugAlbumItems',$favorite);
         if($albumItem){
+            $album = $modx->getObject('sekugAlbums',$albumItem->get('album_id'));
+            $baseAlbumUrl = $sekug->config['displayGalleryUrl'] . $album->get('album_user') . '/' . $albumItem->get('album_id') . '/';
             $favoriteArray['item_title'] = $albumItem->get('item_title');
+            $favoriteArray['thumbnail_image'] = $baseAlbumUrl . 'thumb/' . $albumItem->get('file_name') . '.' .$albumItem->get('file_ext_resize');
             $favoriteArray['file_name'] = $albumItem->get('file_name');
             $favoriteArray['remove_fav_img'] = $sekug->config['imagesUrl'].'delete.png';
             $favoriteArray['remove_favorite_url'] = ($modx->getOption('sekusergalleries.favorites_helper_resource_id')>'') ? $modx->makeUrl($modx->getOption('sekusergalleries.favorites_helper_resource_id'),'',array('action' => 'removeFromFavorites','albumItemID' => $albumItem->get('id'))) : '';

@@ -16,6 +16,7 @@ $xpdo_meta_map['sekugAlbums']= array (
     'password' => NULL,
     'createdon' => '0000-00-00 00:00:00',
     'editedon' => '0000-00-00 00:00:00',
+    'extended' => NULL,
   ),
   'fieldMeta' => 
   array (
@@ -108,6 +109,12 @@ $xpdo_meta_map['sekugAlbums']= array (
       'phptype' => 'timestamp',
       'null' => false,
       'default' => '0000-00-00 00:00:00',
+    ),
+    'extended' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'json',
+      'null' => true,
     ),
   ),
   'aggregates' => 

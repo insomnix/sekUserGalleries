@@ -43,7 +43,8 @@
 		<field key="password" dbtype="varchar(100)" phptype="string" null="true" />
 		<field key="createdon" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00" />
 		<field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00" />
-		
+        <field key="extended" dbtype="text" phptype="json" null="true" />
+
 		<aggregate alias="modUser" class="modUser" local="album_user" foreign="id" cardinality="one" owner="foreign"/>
 		<aggregate alias="sekugUserSettings" class="sekugUserSettings" local="album_user" foreign="gallery_user" cardinality="one" owner="foreign"/>
 		<composite alias="sekugAlbumItems" class="sekugAlbumItems" local="id" foreign="album_id" cardinality="many" owner="local" />
@@ -60,8 +61,9 @@
 		<field key="file_ext_resize" dbtype="varchar" precision="10" phptype="string" null="false" default="" />
 		<field key="createdon" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00" />
 		<field key="editedon" dbtype="timestamp" phptype="timestamp" null="false" default="0000-00-00 00:00:00" />
+        <field key="extended" dbtype="text" phptype="json" null="true" />
 
-		<aggregate alias="sekugAlbums" class="sekugAlbums" local="album_id" foreign="id" cardinality="one" owner="foreign"/>
+        <aggregate alias="sekugAlbums" class="sekugAlbums" local="album_id" foreign="id" cardinality="one" owner="foreign"/>
         <composite alias="sekugFavorites" class="sekugFavorites" local="id" foreign="item_id" cardinality="many" owner="local" />
     </object>
 

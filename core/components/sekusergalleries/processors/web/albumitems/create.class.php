@@ -47,6 +47,22 @@ class sekugAlbumItemsCreateProcessor extends sekugProcessor {
         $fields = $this->dictionary->toArray();
         /* set albumitem */
         $this->albumitem->fromArray($fields);
+        $fields = $this->dictionary->toArray();
+        $newExtended = array();
+        foreach ($fields as $field => $value) {
+            $isValidExtended = true;
+            if ( empty($value) || $field == 'files' || $field == 'id' || $field == 'item_title' || $field == 'item_description' || $field == 'file_name' || $field == 'file_ext' || $field == 'file_ext_resize' || $field == 'file_datetime' || $field == 'album_id') {
+                $isValidExtended = false;
+            }
+
+            if ($isValidExtended) {
+                $newExtended[$field] = $value;
+            }
+        }
+        /* set albumitem */
+        $this->albumitem->fromArray($fields);
+
+        $this->albumitem->set('extended',$newExtended);
     }
 }
 return 'sekugAlbumItemsCreateProcessor';

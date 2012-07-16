@@ -11,6 +11,9 @@
 
                 <label for="item_description">[[%sekug.description]]</label>
                 <textarea cols="65" rows="2" name="item_description[{%=file.name%}]" id="item_description" value=""></textarea>
+
+                <label for="ext_field">Extended Field</label>
+                <input type="text" name="ext_field[{%=file.name%}]" id="ext_field" value="{%=file.ext_field%}" />
         </td>
         {% if (file.error) { %}
             <td class="error">
